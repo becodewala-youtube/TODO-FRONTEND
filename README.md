@@ -95,6 +95,8 @@ JWT_SECRET=your_jwt_secret
 
 > 
 ![image](https://github.com/user-attachments/assets/4436a821-2e82-4278-bf68-538de95e84db)
+> ![image](https://github.com/user-attachments/assets/e056a22d-1b12-4e70-aea1-8b0d15137e79)
+
 ---
 
 
