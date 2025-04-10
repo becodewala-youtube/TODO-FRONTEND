@@ -22,7 +22,7 @@ const Login = () => {
   useEffect(() => {
     // Redirect if user is already logged in
     if (user) {
-      navigate('/');
+      navigate('/');  // Navigate to home page if user is logged in
     }
   }, [user, navigate]);
 
@@ -41,9 +41,9 @@ const Login = () => {
       // Type the error as AxiosError<ErrorResponse>
       const axiosError = err as AxiosError<ErrorResponse>;
 
-      // Now TypeScript knows that axiosError.response.data.message exists
-      if (axiosError.response?.data?.message === 'User already exists') {
-        setErrorMessage('User already exists');
+      // Check if an error message is present
+      if (axiosError.response?.data?.message) {
+        setErrorMessage(axiosError.response.data.message); // Set error message from backend
       } else {
         setErrorMessage('An error occurred. Please try again.');
       }

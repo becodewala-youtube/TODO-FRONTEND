@@ -23,10 +23,11 @@ const initialState: AuthState = {
 export const login = createAsyncThunk(
   'auth/login',
   async ({ email, password }: { email: string; password: string }) => {
-    const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, {
-      email,
-      password,
-    }, { withCredentials: true });
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_BACKEND_URL}/api/users/login`,
+      { email, password },
+      { withCredentials: true } // Send cookies along with the request
+    );
 
     // Persist user data in localStorage on login
     localStorage.setItem('user', JSON.stringify(data));
@@ -38,11 +39,11 @@ export const login = createAsyncThunk(
 export const register = createAsyncThunk(
   'auth/register',
   async ({ name, email, password }: { name: string; email: string; password: string }) => {
-    const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/register`, {
-      name,
-      email,
-      password,
-    }, { withCredentials: true });
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_BACKEND_URL}/api/users/register`,
+      { name, email, password },
+      { withCredentials: true } // Send cookies along with the request
+    );
 
     // Persist user data in localStorage on registration
     localStorage.setItem('user', JSON.stringify(data));
@@ -53,7 +54,7 @@ export const register = createAsyncThunk(
 
 export const logout = createAsyncThunk('auth/logout', async () => {
   await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/logout`, {}, { withCredentials: true });
-  
+
   // Remove user data from localStorage on logout
   localStorage.removeItem('user');
 });
@@ -67,12 +68,8 @@ export const updateProfile = createAsyncThunk(
   }) => {
     const { data } = await axios.put(
       `${import.meta.env.VITE_BACKEND_URL}/api/users/profile`,
-      {
-        name,
-        currentPassword,
-        newPassword,
-      },
-      { withCredentials: true }
+      { name, currentPassword, newPassword },
+      { withCredentials: true } // Send cookies along with the request
     );
 
     // Update the user data in localStorage if it changes
